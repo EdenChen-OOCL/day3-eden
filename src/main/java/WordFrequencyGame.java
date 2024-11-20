@@ -21,12 +21,9 @@ public class WordFrequencyGame {
         else {
             // todo large try...catch
             try {
-                //split the input string with 1 to n pieces of spaces
                 String[] words = sentence.split(REGEX_BLANK);
 
                 List<WordFrequency> wordFrequencyList = Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
-
-                //get the map for the next step of sizing the same word
                 Map<String, List<WordFrequency>> wordToWordFrequenciesMap = getListMap(wordFrequencyList);
 
                 // todo tempory variable
