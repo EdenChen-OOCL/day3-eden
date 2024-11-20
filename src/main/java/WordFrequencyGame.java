@@ -7,17 +7,17 @@ import java.util.StringJoiner;
 public class WordFrequencyGame {
 
     // todo extract method
-    public String getResult(String inputStr) {
+    public String getResult(String sentence) {
         // todo magic value
-        if (inputStr.split("\\s+").length == 1) {
-            return inputStr + " 1";
+        if (sentence.split("\\s+").length == 1) {
+            return sentence + " 1";
         }
         // todo
         else {
             // todo large try...catch
             try {
                 //split the input string with 1 to n pieces of spaces
-                String[] arr = inputStr.split("\\s+");
+                String[] arr = sentence.split("\\s+");
 
                 List<Input> inputList = new ArrayList<>();
                 // todo name, stream
