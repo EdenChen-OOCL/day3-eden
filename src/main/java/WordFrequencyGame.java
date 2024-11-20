@@ -51,22 +51,8 @@ public class WordFrequencyGame {
 
 
     private Map<String, List<WordFrequency>> getListMap(List<WordFrequency> wordFrequencies) {
-        Map<String, List<WordFrequency>> wordToWordFrequenciesMap = new HashMap<>();
-        // todo stream
-        for (WordFrequency wordFrequency : wordFrequencies) {
-            // todo no use
-//       map.computeIfAbsent(input.getValue(), k -> new ArrayList<>()).add(input);
-            // todo duplicate
-            if (!wordToWordFrequenciesMap.containsKey(wordFrequency.getWord())) {
-                ArrayList wordFrequencyWithSameWord = new ArrayList<>();
-                wordFrequencyWithSameWord.add(wordFrequency);
-                wordToWordFrequenciesMap.put(wordFrequency.getWord(), wordFrequencyWithSameWord);
-            } else {
-                wordToWordFrequenciesMap.get(wordFrequency.getWord()).add(wordFrequency);
-            }
-        }
-
-        return wordToWordFrequenciesMap;
+        return wordFrequencies.stream()
+                .collect(Collectors.groupingBy(WordFrequency::getWord));
     }
 
 
