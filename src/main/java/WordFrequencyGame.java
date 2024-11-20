@@ -11,6 +11,7 @@ public class WordFrequencyGame {
     public static final String REGEX_BLANK = "\\s+";
     public static final String LINE_BREAK = "\n";
     public static final String ERROR_MESSAGE = "Calculate Error";
+    public static final String SPACE = " ";
 
     public String getResult(String sentence) {
         try {
@@ -26,7 +27,7 @@ public class WordFrequencyGame {
 
     private static String formatWordFrequencies(List<WordFrequency> wordFrequencyList) {
         return wordFrequencyList.stream()
-                .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
+                .map(wordFrequency -> wordFrequency.getWord() + SPACE + wordFrequency.getWordCount())
                 .collect(Collectors.joining(LINE_BREAK));
     }
 
