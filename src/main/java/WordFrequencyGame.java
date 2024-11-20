@@ -1,9 +1,6 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
@@ -13,7 +10,7 @@ public class WordFrequencyGame {
     public static final String ERROR_MESSAGE = "Calculate Error";
     public static final String SPACE = " ";
 
-    public String getResult(String sentence) {
+    public String calculateWordFrequency(String sentence) {
         try {
             List<WordFrequency> wordFrequencyList = initWordFrequencies(sentence);
 
