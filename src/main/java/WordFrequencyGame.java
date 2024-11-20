@@ -6,10 +6,13 @@ import java.util.StringJoiner;
 
 public class WordFrequencyGame {
 
+    public static final String REGEX_BLANK = "\\s+";
+    public static final String LINE_BREAK = "\n";
+    public static final String ERROR_MESSAGE = "Calculate Error";
+
     // todo extract method
     public String getResult(String sentence) {
-        // todo magic value
-        if (sentence.split("\\s+").length == 1) {
+        if (sentence.split(REGEX_BLANK).length == 1) {
             return sentence + " 1";
         }
         // todo
@@ -17,7 +20,7 @@ public class WordFrequencyGame {
             // todo large try...catch
             try {
                 //split the input string with 1 to n pieces of spaces
-                String[] words = sentence.split("\\s+");
+                String[] words = sentence.split(REGEX_BLANK);
 
                 List<WordFrequency> wordFrequencyList = new ArrayList<>();
                 // todo stream
@@ -40,14 +43,14 @@ public class WordFrequencyGame {
 
                 wordFrequencyList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
-                StringJoiner joiner = new StringJoiner("\n");
+                StringJoiner joiner = new StringJoiner(LINE_BREAK);
                 for (WordFrequency wordFrequency : wordFrequencyList) {
                     String outputLine = wordFrequency.getWord() + " " + wordFrequency.getWordCount();
                     joiner.add(outputLine);
                 }
                 return joiner.toString();
             } catch (Exception e) {
-                return "Calculate Error";
+                return ERROR_MESSAGE;
             }
         }
     }
