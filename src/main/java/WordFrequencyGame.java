@@ -13,21 +13,14 @@ public class WordFrequencyGame {
     public static final String ERROR_MESSAGE = "Calculate Error";
 
     public String getResult(String sentence) {
-        if (sentence.split(REGEX_BLANK).length == 1) {
-            return sentence + " 1";
-        }
-        // todo
-        else {
-            // todo large try...catch
-            try {
-                List<WordFrequency> wordFrequencyList = initWordFrequencies(sentence);
+        try {
+            List<WordFrequency> wordFrequencyList = initWordFrequencies(sentence);
 
-                wordFrequencyList = calculateFrequencyByWord(wordFrequencyList);
+            wordFrequencyList = calculateFrequencyByWord(wordFrequencyList);
 
-                return formatWordFrequencies(wordFrequencyList);
-            } catch (Exception e) {
-                return ERROR_MESSAGE;
-            }
+            return formatWordFrequencies(wordFrequencyList);
+        } catch (Exception e) {
+            return ERROR_MESSAGE;
         }
     }
 
