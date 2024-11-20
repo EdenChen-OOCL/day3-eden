@@ -22,17 +22,17 @@ public class WordFrequencyGame {
             // todo large try...catch
             try {
                 String[] words = sentence.split(REGEX_BLANK);
-
                 List<WordFrequency> wordFrequencyList = Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
+
                 Map<String, List<WordFrequency>> wordToWordFrequenciesMap = getListMap(wordFrequencyList);
 
                 // todo tempory variable
                 List<WordFrequency> wordFrequencies = wordToWordFrequenciesMap.entrySet().stream()
                         .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
-                        .collect(Collectors.toList());
+                        .sorted((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount())
+                        .toList();
                 wordFrequencyList = wordFrequencies;
 
-                wordFrequencyList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
                 return wordFrequencyList.stream()
                         .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
