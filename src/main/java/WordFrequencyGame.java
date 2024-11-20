@@ -12,7 +12,6 @@ public class WordFrequencyGame {
     public static final String LINE_BREAK = "\n";
     public static final String ERROR_MESSAGE = "Calculate Error";
 
-    // todo extract method
     public String getResult(String sentence) {
         if (sentence.split(REGEX_BLANK).length == 1) {
             return sentence + " 1";
@@ -21,26 +20,35 @@ public class WordFrequencyGame {
         else {
             // todo large try...catch
             try {
-                String[] words = sentence.split(REGEX_BLANK);
-                List<WordFrequency> wordFrequencyList = Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
+                List<WordFrequency> wordFrequencyList = initWordFrequencies(sentence);
 
-                Map<String, List<WordFrequency>> wordToWordFrequenciesMap = getListMap(wordFrequencyList);
+                wordFrequencyList = calculateFrequencyByWord(wordFrequencyList);
 
-                // todo tempory variable
-                List<WordFrequency> wordFrequencies = wordToWordFrequenciesMap.entrySet().stream()
-                        .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
-                        .sorted((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount())
-                        .toList();
-                wordFrequencyList = wordFrequencies;
-
-
-                return wordFrequencyList.stream()
-                        .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
-                        .collect(Collectors.joining(LINE_BREAK));
+                return formatWordFrequencies(wordFrequencyList);
             } catch (Exception e) {
                 return ERROR_MESSAGE;
             }
         }
+    }
+
+    private static String formatWordFrequencies(List<WordFrequency> wordFrequencyList) {
+        return wordFrequencyList.stream()
+                .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
+                .collect(Collectors.joining(LINE_BREAK));
+    }
+
+    private List<WordFrequency> calculateFrequencyByWord(List<WordFrequency> wordFrequencyList) {
+        Map<String, List<WordFrequency>> wordToWordFrequenciesMap = getListMap(wordFrequencyList);
+
+        return wordToWordFrequenciesMap.entrySet().stream()
+                .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
+                .sorted((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount())
+                .toList();
+    }
+
+    private static List<WordFrequency> initWordFrequencies(String sentence) {
+        String[] words = sentence.split(REGEX_BLANK);
+        return Arrays.stream(words).map(word -> new WordFrequency(word, 1)).toList();
     }
 
 
