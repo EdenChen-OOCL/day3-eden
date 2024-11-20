@@ -37,12 +37,9 @@ public class WordFrequencyGame {
 
                 wordFrequencyList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
-                StringJoiner joiner = new StringJoiner(LINE_BREAK);
-                for (WordFrequency wordFrequency : wordFrequencyList) {
-                    String outputLine = wordFrequency.getWord() + " " + wordFrequency.getWordCount();
-                    joiner.add(outputLine);
-                }
-                return joiner.toString();
+                return wordFrequencyList.stream()
+                        .map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount())
+                        .collect(Collectors.joining(LINE_BREAK));
             } catch (Exception e) {
                 return ERROR_MESSAGE;
             }
